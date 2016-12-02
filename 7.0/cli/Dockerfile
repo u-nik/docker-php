@@ -97,7 +97,7 @@ RUN pecl install xdebug-${PHP_XDEBUG_VERSION} \
     && pecl clear-cache \
     && rm -rf /tmp/pear/download/*
 
-COPY docker-php-ext-* php.sh /usr/local/bin/
+COPY docker-php-ext-* *.sh settings.php /usr/local/bin/
 RUN chmod +x /usr/local/bin/php.sh \
     && mv /usr/local/bin/php /usr/local/bin/php-cli \
     && mv /usr/local/bin/php.sh /usr/local/bin/php

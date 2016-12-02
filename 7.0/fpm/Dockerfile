@@ -98,8 +98,6 @@ RUN pecl install xdebug-${PHP_XDEBUG_VERSION} \
     && pecl clear-cache \
     && rm -rf /tmp/pear/download/*
 
-COPY docker-php-ext-* /usr/local/bin/
-
 WORKDIR /var/www/html
 
 RUN set -ex \
@@ -138,9 +136,8 @@ RUN set -ex \
 		echo 'listen = [::]:9000'; \
 	} | tee php-fpm.d/zz-docker.conf
 
-COPY *.sh /usr/local/bin/
-
 # Rename original php binary to php-cli and replace it with an shell script wrapper.
+COPY docker-php-ext-* *.sh settings.php /usr/local/bin/
 RUN mv /usr/local/bin/php /usr/local/bin/php-cli \
     && mv /usr/local/bin/php.sh /usr/local/bin/php \
     && chmod +x /usr/local/bin/php \
