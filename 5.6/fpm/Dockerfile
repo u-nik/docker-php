@@ -14,7 +14,7 @@ ENV PHP_XDEBUG_ENABLED false
 
 # phpredis
 # Set the latest commit of the stable branch in https://github.com/phpredis/phpredis
-ENV PHPREDIS_COMMIT 3.0.0
+ENV PHPREDIS_COMMIT 3.1.1
 
 RUN apt-get update && apt-get install -y \
 

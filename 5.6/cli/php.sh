@@ -22,7 +22,7 @@ if ${PHP_XDEBUG_ENABLED}; then
     fi
 
     exec php-cli ${defaultSettings} \
-        -dzend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20151012/xdebug.so \
+        -dzend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20131226/xdebug.so \
         -dhtml_errors=false \
         -dxdebug.remote_enable=1 \
         -dxdebug.remote_autostart=1 \
