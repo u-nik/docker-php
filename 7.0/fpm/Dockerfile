@@ -2,19 +2,19 @@ FROM debian:jessie
 
 # php
 ENV GPG_KEYS 1A4E8B7277C42E53DBA9C7B9BCAA30EA9C0D5763 6E4F6AB321FDC07F2C332E3AC2BF0BC433CFC8B3
-ENV PHP_VERSION 7.0.17
+ENV PHP_VERSION 7.0.23
 ENV PHP_FILENAME php-${PHP_VERSION}.tar.xz
-ENV PHP_SHA256 471c16fcdd6a5e1a37199e97bcaeea6117626229785185be7532aaa7c6ee04be
+ENV PHP_SHA256 8e526e3551a58e00c8055fa4a72804aa1bd3ee1c0411b25bf1504cc4992609df
 ENV PHP_INI_DIR /usr/local/etc/php
 ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data
 
 # xdebug
-ENV PHP_XDEBUG_VERSION 2.5.1
+ENV PHP_XDEBUG_VERSION 2.5.5
 ENV PHP_XDEBUG_ENABLED false
 
 # phpredis
 # Set the latest commit of the php7 branch in https://github.com/phpredis/phpredis
-ENV PHPREDIS_COMMIT 3.1.1
+ENV PHPREDIS_COMMIT 3.1.3
 
 RUN apt-get update && apt-get install -y \
 

@@ -2,19 +2,19 @@ FROM debian:jessie
 
 # php
 ENV GPG_KEYS 6E4F6AB321FDC07F2C332E3AC2BF0BC433CFC8B3
-ENV PHP_VERSION 5.6.30
+ENV PHP_VERSION 5.6.31
 ENV PHP_FILENAME php-${PHP_VERSION}.tar.xz
-ENV PHP_SHA256 a363185c786432f75e3c7ff956b49c3369c3f6906a6b10459f8d1ddc22f70805
+ENV PHP_SHA256 c464af61240a9b7729fabe0314cdbdd5a000a4f0c9bd201f89f8628732fe4ae4
 ENV PHP_INI_DIR /usr/local/etc/php
 ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data
 
 # xdebug
-ENV PHP_XDEBUG_VERSION 2.5.1
+ENV PHP_XDEBUG_VERSION 2.5.5
 ENV PHP_XDEBUG_ENABLED false
 
 # phpredis
 # Set the latest commit of the stable branch in https://github.com/phpredis/phpredis
-ENV PHPREDIS_COMMIT 3.1.1
+ENV PHPREDIS_COMMIT 3.1.3
 
 RUN apt-get update && apt-get install -y \
 
