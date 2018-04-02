@@ -1,19 +1,19 @@
 FROM debian:jessie
 
 # php
-ENV GPG_KEYS 6E4F6AB321FDC07F2C332E3AC2BF0BC433CFC8B3
-ENV PHP_VERSION 5.6.35
+ENV GPG_KEYS 1729F83938DA44E27BA0F4D3DBDB397470D12172 B1B44D8F021E4E2D6021E995DC9FF8D3EE5AF27F
+ENV PHP_VERSION 7.2.4
 ENV PHP_FILENAME php-${PHP_VERSION}.tar.xz
-ENV PHP_SHA256 9985cb64cb8224c289effff5b34f670d14f838175f76daea0507d643eec650d2
+ENV PHP_SHA256 7916b1bd148ddfd46d7f8f9a517d4b09cd8a8ad9248734e7c8dd91ef17057a88
+
 ENV PHP_INI_DIR /usr/local/etc/php
-ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data
 
 # xdebug
 ENV PHP_XDEBUG_VERSION 2.6.0
 ENV PHP_XDEBUG_ENABLED false
 
 # phpredis
-# Set the latest commit of the stable branch in https://github.com/phpredis/phpredis
+# Set the latest commit of the php7 branch in https://github.com/phpredis/phpredis
 ENV PHPREDIS_COMMIT 4.0.0
 
 RUN apt-get update && apt-get install -y \
@@ -98,50 +98,9 @@ RUN pecl install xdebug-${PHP_XDEBUG_VERSION} \
     && pecl clear-cache \
     && rm -rf /tmp/pear/download/*
 
-WORKDIR /var/www/html
-
-RUN set -ex \
-	&& cd /usr/local/etc \
-	&& if [ -d php-fpm.d ]; then \
-		# for some reason, upstream's php-fpm.conf.default has "include=NONE/etc/php-fpm.d/*.conf"
-		sed 's!=NONE/!=!g' php-fpm.conf.default | tee php-fpm.conf > /dev/null; \
-		cp php-fpm.d/www.conf.default php-fpm.d/www.conf; \
-	else \
-		# PHP 5.x don't use "include=" by default, so we'll create our own simple config that mimics PHP 7+ for consistency
-		mkdir php-fpm.d; \
-		cp php-fpm.conf.default php-fpm.d/www.conf; \
-		{ \
-			echo '[global]'; \
-			echo 'include=etc/php-fpm.d/*.conf'; \
-		} | tee php-fpm.conf; \
-	fi \
-	&& { \
-		echo '[global]'; \
-		echo 'error_log = /proc/self/fd/2'; \
-		echo; \
-		echo '[www]'; \
-		echo '; if we send this to /proc/self/fd/1, it never appears'; \
-		echo 'access.log = /proc/self/fd/2'; \
-		echo; \
-		echo 'clear_env = no'; \
-		echo; \
-		echo '; Ensure worker stdout and stderr are sent to the main error log.'; \
-		echo 'catch_workers_output = yes'; \
-	} | tee php-fpm.d/docker.conf \
-	&& { \
-		echo '[global]'; \
-		echo 'daemonize = no'; \
-		echo; \
-		echo '[www]'; \
-		echo 'listen = [::]:9000'; \
-	} | tee php-fpm.d/zz-docker.conf
-
-# Rename original php binary to php-cli and replace it with an shell script wrapper.
 COPY docker-php-ext-* *.sh settings.php /usr/local/bin/
-RUN mv /usr/local/bin/php /usr/local/bin/php-cli \
-    && mv /usr/local/bin/php.sh /usr/local/bin/php \
-    && chmod +x /usr/local/bin/php \
-    && chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/php.sh \
+    && mv /usr/local/bin/php /usr/local/bin/php-cli \
+    && mv /usr/local/bin/php.sh /usr/local/bin/php
 
-EXPOSE 9000
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["php", "-a"]
