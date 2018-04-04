@@ -7,8 +7,8 @@ ENV PHP_FILENAME php-${PHP_VERSION}.tar.xz
 ENV PHP_SHA256 9985cb64cb8224c289effff5b34f670d14f838175f76daea0507d643eec650d2
 ENV PHP_INI_DIR /usr/local/etc/php
 
-# xdebug
-ENV PHP_XDEBUG_VERSION 2.6.0
+# xdebug (2.5.5 is the latest version with PHP 5.6 support)
+ENV PHP_XDEBUG_VERSION 2.5.5
 ENV PHP_XDEBUG_ENABLED false
 
 # phpredis
