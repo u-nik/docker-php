@@ -1,0 +1,10 @@
+sudo: required
+
+servies:
+- docker
+
+jobs:
+  include:
+    - stage: build
+      script: docker build -t dockerizr/php:7.2-cli 7.2/cli
+    - script: docker build -t dockerizr/php:7.2-fpm 7.2/fpm
