@@ -11,54 +11,54 @@ jobs:
       - VERSION=7.2
       script:
       - echo "${DOCKER_PASSWORD}" | docker login -u $DOCKER_USERNAME --password-stdin
-      - docker build -t dockerizr/php:${VERSION}-${TYPE} {VERSION}/${TYPE}
+      - docker build -t dockerizr/php:${VERSION}-${TYPE} ${VERSION}/${TYPE}
       - docker push dockerizr/php:${VERSION}-${TYPE}
     - env:
       - TYPE=cli
       - VERSION=7.2
       script:
       - echo "${DOCKER_PASSWORD}" | docker login -u $DOCKER_USERNAME --password-stdin
-      - docker build -t dockerizr/php:${VERSION}-${TYPE} {VERSION}/${TYPE}
+      - docker build -t dockerizr/php:${VERSION}-${TYPE} ${VERSION}/${TYPE}
       - docker push dockerizr/php:${VERSION}-${TYPE}
     - env:
       - TYPE=fpm
       - VERSION=7.1
       script:
       - echo "${DOCKER_PASSWORD}" | docker login -u $DOCKER_USERNAME --password-stdin
-      - docker build -t dockerizr/php:${VERSION}-${TYPE} {VERSION}/${TYPE}
+      - docker build -t dockerizr/php:${VERSION}-${TYPE} ${VERSION}/${TYPE}
       - docker push dockerizr/php:${VERSION}-${TYPE}
     - env:
       - TYPE=cli
       - VERSION=7.1
       script:
       - echo "${DOCKER_PASSWORD}" | docker login -u $DOCKER_USERNAME --password-stdin
-      - docker build -t dockerizr/php:${VERSION}-${TYPE} {VERSION}/${TYPE}
+      - docker build -t dockerizr/php:${VERSION}-${TYPE} ${VERSION}/${TYPE}
       - docker push dockerizr/php:${VERSION}-${TYPE}
     - env:
       - TYPE=fpm
       - VERSION=7.0
       script:
       - echo "${DOCKER_PASSWORD}" | docker login -u $DOCKER_USERNAME --password-stdin
-      - docker build -t dockerizr/php:${VERSION}-${TYPE} {VERSION}/${TYPE}
+      - docker build -t dockerizr/php:${VERSION}-${TYPE} ${VERSION}/${TYPE}
       - docker push dockerizr/php:${VERSION}-${TYPE}
     - env:
       - TYPE=cli
       - VERSION=7.0
       script:
       - echo "${DOCKER_PASSWORD}" | docker login -u $DOCKER_USERNAME --password-stdin
-      - docker build -t dockerizr/php:${VERSION}-${TYPE} {VERSION}/${TYPE}
+      - docker build -t dockerizr/php:${VERSION}-${TYPE} ${VERSION}/${TYPE}
       - docker push dockerizr/php:${VERSION}-${TYPE}
     - env:
       - TYPE=fpm
       - VERSION=5.6
       script:
       - echo "${DOCKER_PASSWORD}" | docker login -u $DOCKER_USERNAME --password-stdin
-      - docker build -t dockerizr/php:${VERSION}-${TYPE} {VERSION}/${TYPE}
+      - docker build -t dockerizr/php:${VERSION}-${TYPE} ${VERSION}/${TYPE}
       - docker push dockerizr/php:${VERSION}-${TYPE}
     - env:
       - TYPE=cli
       - VERSION=5.6
       script:
       - echo "${DOCKER_PASSWORD}" | docker login -u $DOCKER_USERNAME --password-stdin
-      - docker build -t dockerizr/php:${VERSION}-${TYPE} {VERSION}/${TYPE}
+      - docker build -t dockerizr/php:${VERSION}-${TYPE} ${VERSION}/${TYPE}
       - docker push dockerizr/php:${VERSION}-${TYPE}
