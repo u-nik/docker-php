@@ -3,38 +3,20 @@ sudo: required
 servies:
 - docker
 
+language: php
+
+env:
+- TYPE=cli
+- TYPE=fpm
+- VERSION=7.2
+- VERSION=7.1
+- VERSION=7.0
+- VERSION=5.6
+
 jobs:
   include:
     - stage: build
       script:
-      - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      - docker build -t dockerizr/php:7.2-cli 7.2/cli
-      - docker push dockerizr/php:7.2-cli
-    - script:
-      - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      - docker build -t dockerizr/php:7.2-fpm 7.2/fpm
-      - docker push dockerizr/php:7.2-fpm
-    - script:
-      - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      - docker build -t dockerizr/php:7.1-cli 7.1/cli
-      - docker push dockerizr/php:7.1-cli
-    - script:
-      - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      - docker build -t dockerizr/php:7.1-fpm 7.1/fpm
-      - docker push dockerizr/php:7.1-fpm
-    - script:
-      - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      - docker build -t dockerizr/php:7.0-cli 7.0/cli
-      - docker push dockerizr/php:7.0-cli
-    - script:
-      - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      - docker build -t dockerizr/php:7.0-fpm 7.0/fpm
-      - docker push dockerizr/php:7.0-fpm
-    - script:
-      - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      - docker build -t dockerizr/php:5.6-cli 5.6/cli
-      - docker push dockerizr/php:5.6-cli
-    - script:
-      - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      - docker build -t dockerizr/php:5.6-fpm 5.6/fpm
-      - docker push dockerizr/php:5.6-fpm
+      - echo "${DOCKER_PASSWORD}" | docker login -u $DOCKER_USERNAME --password-stdin
+      - docker build -t dockerizr/php:${VERSION}-${TYPE} {VERSION}/${TYPE}
+      - docker push dockerizr/php:${VERSION}-${TYPE}
