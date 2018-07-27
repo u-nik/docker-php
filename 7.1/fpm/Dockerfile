@@ -2,9 +2,9 @@ FROM debian:jessie
 
 # php
 ENV GPG_KEYS A917B1ECDA84AEC2B568FED6F50ABC807BD5DCD0 528995BFEDFBA7191D46839EF9BA0ADA31CBD89E
-ENV PHP_VERSION 7.1.16
+ENV PHP_VERSION 7.1.20
 ENV PHP_FILENAME php-${PHP_VERSION}.tar.xz
-ENV PHP_SHA256 a5d67e477248a3911af7ef85c8400c1ba8cd632184186fd31070b96714e669f1
+ENV PHP_SHA256 cd7d1006201459d43fae0790cce4eb3451add5c87f4cadb13b228d4c179b850c
 ENV PHP_INI_DIR /usr/local/etc/php
 ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data
 
@@ -17,7 +17,6 @@ ENV PHP_XDEBUG_ENABLED false
 ENV PHPREDIS_COMMIT 4.0.0
 
 RUN apt-get update && apt-get install -y \
-
         # phpize deps
 		autoconf \
 		file \
@@ -28,14 +27,12 @@ RUN apt-get update && apt-get install -y \
 		make \
 		pkg-config \
 		re2c \
-
 		# persistent / runtime deps
 		ca-certificates \
         curl \
         libedit2 \
         libsqlite3-0 \
         libxml2 \
-
 	    --no-install-recommends && rm -r /var/lib/apt/lists/* \
 	&& mkdir -p $PHP_INI_DIR/conf.d
 

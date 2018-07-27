@@ -2,9 +2,9 @@ FROM debian:jessie
 
 # php
 ENV GPG_KEYS 1A4E8B7277C42E53DBA9C7B9BCAA30EA9C0D5763 6E4F6AB321FDC07F2C332E3AC2BF0BC433CFC8B3
-ENV PHP_VERSION 7.0.29
+ENV PHP_VERSION 7.0.31
 ENV PHP_FILENAME php-${PHP_VERSION}.tar.xz
-ENV PHP_SHA256 ca79d3ecc123bff4b623d4a1bbf5ad53ad39f5f2f5912fecc0ea97e95eba21cc
+ENV PHP_SHA256 68f57b3f4587071fb54a620cb83a1cfb3f0bd4ee071e0ce3bf7046a5f2d2f3cf
 ENV PHP_INI_DIR /usr/local/etc/php
 
 # xdebug
@@ -16,7 +16,6 @@ ENV PHP_XDEBUG_ENABLED false
 ENV PHPREDIS_COMMIT 4.0.0
 
 RUN apt-get update && apt-get install -y \
-
         # phpize deps
 		autoconf \
 		file \
@@ -27,14 +26,12 @@ RUN apt-get update && apt-get install -y \
 		make \
 		pkg-config \
 		re2c \
-
 		# persistent / runtime deps
 		ca-certificates \
         curl \
         libedit2 \
         libsqlite3-0 \
         libxml2 \
-
 	    --no-install-recommends && rm -r /var/lib/apt/lists/* \
 	&& mkdir -p $PHP_INI_DIR/conf.d
 
