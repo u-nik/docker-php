@@ -16,6 +16,9 @@ variables `PHP_XDEBUG_ENABLED=true`. Optional you can specify the
 remote host address with `PHP_XDEBUG_REMOTE_HOST=your-host-ip`
 and the session id key `PHP_XDEBUG_IDEKEY=your-idekey`
 
+### PhpStorm Settings
+You have to create a run configuration with the name `docker` to get an debug session running.
+
 ## Override PHP ini settings
 You can override every available php.ini setting with environment
 variables. Each env var starts with `PHP_INI_*` followed by the

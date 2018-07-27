@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Change user id for fpm user "www-data".
+USER_ID=${FPM_USER_ID:-1000}
+
+echo "Starting with UID : $USER_ID"
+usermod -u ${USER_ID} www-data
+
 # Xdebug settings
 export PHP_XDEBUG_ENABLED=${PHP_XDEBUG_ENABLED:-false}
 export PHP_XDEBUG_REMOTE_HOST=${PHP_XDEBUG_REMOTE_HOST:-"localhost"}
